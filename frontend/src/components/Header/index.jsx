@@ -14,22 +14,33 @@ export default function Header() {
     navigate('/');
   };
 
-  const userMenu = {
-    items: [
-      {
-        key: 'profile',
-        icon: <UserOutlined />,
-        label: '个人主页',
-        onClick: () => navigate(`/user/${user?.userId}`),
-      },
-      {
-        key: 'logout',
-        icon: <LogoutOutlined />,
-        label: '退出登录',
-        onClick: handleLogout,
-      },
-    ],
-  };
+  const userMenuItems = [
+    {
+      key: 'profile',
+      icon: <UserOutlined />,
+      label: '个人主页',
+      onClick: () => navigate(`/user/${user?.userId}`),
+    },
+    {
+      key: 'logout',
+      icon: <LogoutOutlined />,
+      label: '退出登录',
+      onClick: handleLogout,
+    },
+  ];
+
+  const navItems = [
+    {
+      key: 'home',
+      icon: <HomeOutlined />,
+      label: <Link to="/">首页</Link>,
+    },
+    {
+      key: 'categories',
+      icon: <AppstoreOutlined />,
+      label: <Link to="/?tab=categories">板块</Link>,
+    },
+  ];
 
   return (
     <AntHeader className="header">
@@ -37,17 +48,10 @@ export default function Header() {
         <Link to="/" className="logo">
           🤖 AI 论坛
         </Link>
-        <Menu mode="horizontal" className="nav-menu">
-          <Menu.Item key="home" icon={<HomeOutlined />}>
-            <Link to="/">首页</Link>
-          </Menu.Item>
-          <Menu.Item key="categories" icon={<AppstoreOutlined />}>
-            <Link to="/?tab=categories">板块</Link>
-          </Menu.Item>
-        </Menu>
+        <Menu mode="horizontal" className="nav-menu" items={navItems} />
         <div className="user-section">
           {isLoggedIn ? (
-            <Dropdown menu={userMenu} placement="bottomRight">
+            <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <div className="user-info">
                 <Avatar src={user?.avatar} icon={<UserOutlined />} />
                 <span className="username">{user?.username}</span>
