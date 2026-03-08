@@ -1,0 +1,152 @@
+/* PostCard 样式 - 科技感卡片 */
+
+.post-card {
+  background: var(--bg-dark-800) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  transition: all var(--transition-normal) !important;
+  overflow: hidden;
+}
+
+.post-card:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), var(--shadow-neon-cyan) !important;
+  transform: translateY(-4px);
+}
+
+.post-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.author-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.author-link:hover {
+  transform: translateX(4px);
+}
+
+.author-avatar {
+  border: 2px solid var(--color-primary);
+  box-shadow: var(--shadow-neon-cyan);
+  transition: all var(--transition-normal);
+}
+
+.author-link:hover .author-avatar {
+  border-color: var(--color-accent-cyan);
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.author-name {
+  color: var(--text-primary) !important;
+  font-size: 14px;
+}
+
+.post-time {
+  color: var(--text-muted) !important;
+  font-size: 12px;
+}
+
+.post-tags {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.hot-tag {
+  background: linear-gradient(135deg, var(--color-accent-orange), #ff6600) !important;
+  border: none !important;
+  animation: pulse 2s infinite;
+}
+
+.category-tag {
+  background: transparent !important;
+  border: 1px solid var(--color-accent-cyan) !important;
+  color: var(--color-accent-cyan) !important;
+}
+
+.post-content-link {
+  text-decoration: none;
+  display: block;
+}
+
+.post-title {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  transition: color var(--transition-fast);
+}
+
+.post-card:hover .post-title {
+  color: var(--color-accent-cyan);
+}
+
+.post-excerpt {
+  color: var(--text-secondary) !important;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0 !important;
+}
+
+.post-stats {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-muted);
+  font-size: 13px;
+  transition: color var(--transition-fast);
+}
+
+.stat-item:hover {
+  color: var(--text-primary);
+}
+
+.stat-item.like:hover {
+  color: var(--color-accent-pink);
+}
+
+.stat-icon {
+  font-size: 14px;
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .post-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .post-tags {
+    width: 100%;
+  }
+  
+  .post-stats {
+    gap: var(--spacing-md);
+  }
+}

@@ -1,13 +1,30 @@
+/* Layout 样式 */
+
 .layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg-dark-900);
 }
 
 .main-content {
   flex: 1;
-  padding: 24px;
-  max-width: 1200px;
+  padding: var(--spacing-lg);
+  max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+  animation: fadeIn 0.3s ease;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .main-content {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: var(--spacing-sm);
+  }
 }
