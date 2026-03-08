@@ -1,4 +1,4 @@
-/* Login 页面样式 */
+/* Login 页面样式 - 科技感玻璃拟态 */
 
 .login-page {
   min-height: calc(100vh - 64px);
@@ -6,15 +6,31 @@
   align-items: center;
   justify-content: center;
   padding: var(--spacing-xl);
+  background: var(--color-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.login-page::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: 
-    radial-gradient(ellipse at top, #1a1a3a 0%, transparent 50%),
-    radial-gradient(ellipse at bottom, #0a1a1a 0%, transparent 50%),
-    var(--bg-dark-900);
+    radial-gradient(ellipse 30% 40% at 30% 20%, rgba(0, 229, 255, 0.1), transparent),
+    radial-gradient(ellipse 40% 30% at 70% 80%, rgba(168, 85, 247, 0.08), transparent);
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .login-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
   animation: fadeIn 0.5s ease;
 }
 
@@ -24,9 +40,9 @@
 }
 
 .login-icon {
-  font-size: 48px;
-  color: var(--color-accent-cyan);
-  filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5));
+  font-size: 56px;
+  color: var(--color-primary);
+  filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.5));
   animation: glow 2s infinite;
   margin-bottom: var(--spacing-md);
 }
@@ -36,15 +52,19 @@
 }
 
 .login-subtitle {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
 .login-card {
-  background: var(--bg-dark-800) !important;
-  border: 1px solid var(--border-color) !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) var(--glass-saturate) !important;
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: var(--radius-xl) !important;
-  box-shadow: var(--shadow-lg), var(--shadow-neon-cyan) !important;
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 40px rgba(0, 229, 255, 0.05) !important;
 }
 
 .login-form {
@@ -52,46 +72,64 @@
 }
 
 .login-input {
-  background: var(--bg-dark-700) !important;
-  border-color: var(--border-color) !important;
-  color: var(--text-primary) !important;
+  background: rgba(28, 28, 38, 0.8) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--color-text-primary) !important;
+  transition: all var(--transition-normal) !important;
 }
 
-.login-input:hover,
-.login-input:focus {
-  border-color: var(--color-accent-cyan) !important;
-  box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.1) !important;
+.login-input:hover {
+  border-color: var(--color-border-hover) !important;
+}
+
+.login-input:focus,
+.login-input.ant-input-affix-wrapper-focused {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1), 0 0 20px rgba(0, 229, 255, 0.1) !important;
 }
 
 .login-input::placeholder {
-  color: var(--text-muted) !important;
+  color: var(--color-text-tertiary) !important;
 }
 
 .login-btn {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light)) !important;
+  background: var(--gradient-primary) !important;
   border: none !important;
-  box-shadow: var(--shadow-neon-cyan) !important;
-  font-weight: 500;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-neon) !important;
+  font-weight: 600;
   height: 44px !important;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-normal) !important;
 }
 
 .login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 40px rgba(0, 245, 255, 0.2) !important;
+  box-shadow: var(--shadow-neon-strong) !important;
+}
+
+.login-btn:active {
+  transform: translateY(0);
 }
 
 /* Tabs 样式 */
 .login-card .ant-tabs-tab {
-  color: var(--text-secondary) !important;
+  color: var(--color-text-secondary) !important;
+  font-weight: 500;
+  transition: color var(--transition-fast) !important;
+}
+
+.login-card .ant-tabs-tab:hover {
+  color: var(--color-text-primary) !important;
 }
 
 .login-card .ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: var(--color-accent-cyan) !important;
+  color: var(--color-primary) !important;
 }
 
 .login-card .ant-tabs-ink-bar {
-  background: var(--color-accent-cyan) !important;
+  background: var(--color-primary) !important;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 /* 响应式 */
@@ -102,5 +140,9 @@
   
   .login-container {
     max-width: 100%;
+  }
+  
+  .login-icon {
+    font-size: 48px;
   }
 }

@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
   const isHot = (post.viewCount || 0) > 100 || (post.likeCount || 0) > 10;
   
   return (
-    <Card className="post-card" hoverable>
+    <Card className="post-card glass animate-fadeIn" hoverable>
       <div className="post-card-header">
         <Link to={`/user/${post.author?.userId}`} className="author-link">
           <Avatar 
@@ -26,7 +26,7 @@ export default function PostCard({ post }) {
         </Link>
         <div className="post-tags">
           {isHot && (
-            <Tag color="orange" className="hot-tag">
+            <Tag color="orange" className="hot-tag animate-pulse">
               <FireOutlined /> 热门
             </Tag>
           )}
@@ -37,7 +37,7 @@ export default function PostCard({ post }) {
       </div>
       
       <Link to={`/post/${post.postId}`} className="post-content-link">
-        <h3 className="post-title">{post.title}</h3>
+        <h3 className="post-title gradient-text-hover">{post.title}</h3>
         <Paragraph ellipsis={{ rows: 2 }} className="post-excerpt">
           {post.content}
         </Paragraph>

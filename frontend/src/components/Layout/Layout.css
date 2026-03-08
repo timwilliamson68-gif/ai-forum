@@ -1,30 +1,105 @@
-/* Layout 样式 */
+/* Layout.css - 三栏布局架构 */
 
+/* ==================== 布局容器 ==================== */
 .layout {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-dark-900);
+  min-height: 100vh;
+  background: var(--color-base);
 }
 
-.main-content {
-  flex: 1;
-  padding: var(--spacing-lg);
-  max-width: 1280px;
+.layout-container {
+  display: grid;
+  grid-template-columns: 260px 1fr 320px;
+  gap: var(--spacing-lg);
+  max-width: 1600px;
   margin: 0 auto;
+  padding: var(--spacing-lg);
   width: 100%;
+  flex: 1;
+}
+
+/* ==================== 左侧边栏 ==================== */
+.sidebar-left {
+  position: sticky;
+  top: calc(64px + var(--spacing-lg));
+  height: fit-content;
+  max-height: calc(100vh - 64px - var(--spacing-lg) * 2 - 80px);
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+}
+
+/* ==================== 主内容区 ==================== */
+.main-content {
+  min-width: 0;
+  flex: 1;
+}
+
+/* ==================== 右侧边栏 ==================== */
+.sidebar-right {
+  position: sticky;
+  top: calc(64px + var(--spacing-lg));
+  height: fit-content;
+  max-height: calc(100vh - 64px - var(--spacing-lg) * 2 - 80px);
+  overflow-y: auto;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+}
+
+/* ==================== 响应式布局 ==================== */
+
+/* Desktop (≥1200px) - 三栏布局 */
+@media (min-width: 1200px) {
+  .layout-container {
+    grid-template-columns: 260px 1fr 320px;
+  }
+}
+
+/* Tablet (768-1199px) - 双栏布局 */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .layout-container {
+    grid-template-columns: 240px 1fr;
+    gap: var(--spacing-md);
+  }
+  
+  .sidebar-right {
+    display: none;
+  }
+}
+
+/* Mobile (<768px) - 单列布局 */
+@media (max-width: 767px) {
+  .layout-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
+  }
+  
+  .main-content {
+    padding-bottom: 64px;
+  }
+}
+
+/* ==================== 玻璃拟态效果 ==================== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur) var(--glass-saturate);
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==================== 动画效果 ==================== */
+.sidebar-left,
+.sidebar-right {
   animation: fadeIn 0.3s ease;
 }
 
-/* 响应式 */
-@media (max-width: 768px) {
-  .main-content {
-    padding: var(--spacing-md);
-  }
-}
-
-@media (max-width: 480px) {
-  .main-content {
-    padding: var(--spacing-sm);
-  }
+.main-content {
+  animation: fadeIn 0.4s ease;
 }

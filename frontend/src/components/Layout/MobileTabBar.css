@@ -1,0 +1,65 @@
+/* MobileTabBar.css - 底部导航栏 */
+
+.mobile-tabbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur) var(--glass-saturate);
+  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
+  border-top: 1px solid var(--color-border);
+  z-index: 1000;
+}
+
+.tabbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color: var(--color-text-secondary);
+}
+
+.tabbar-item:hover {
+  color: var(--color-text-primary);
+}
+
+.tabbar-item.active {
+  color: var(--color-primary);
+}
+
+.tabbar-item.active .tabbar-icon {
+  filter: drop-shadow(0 0 8px var(--color-primary));
+}
+
+.tabbar-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+  transition: all var(--transition-fast);
+}
+
+.tabbar-label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Mobile Only */
+@media (max-width: 767px) {
+  .mobile-tabbar {
+    display: flex;
+  }
+}
+
+/* Safe Area for iOS */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-tabbar {
+    padding-bottom: env(safe-area-inset-bottom);
+    height: calc(56px + env(safe-area-inset-bottom));
+  }
+}

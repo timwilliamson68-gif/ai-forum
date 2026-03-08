@@ -44,11 +44,11 @@ export default function Header() {
   ];
 
   return (
-    <AntHeader className="header">
+    <AntHeader className="header glass">
       <div className="header-content">
         <Link to="/" className="logo">
           <RobotOutlined className="logo-icon" />
-          <span className="logo-text">AI 论坛</span>
+          <span className="logo-text gradient-text">AI 论坛</span>
         </Link>
         <Menu 
           mode="horizontal" 
@@ -59,7 +59,7 @@ export default function Header() {
         <div className="user-section">
           {isLoggedIn ? (
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-              <div className="user-info">
+              <div className="user-info animate-fadeIn">
                 <Avatar 
                   src={user?.avatar} 
                   icon={<UserOutlined />}
@@ -72,7 +72,7 @@ export default function Header() {
             <Button 
               type="primary" 
               onClick={() => navigate('/login')}
-              className="login-btn"
+              className="login-btn neon-border"
             >
               登录
             </Button>

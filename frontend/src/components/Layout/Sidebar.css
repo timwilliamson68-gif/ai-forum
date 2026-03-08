@@ -1,0 +1,34 @@
+/* Sidebar.css */
+
+.sidebar {
+  width: 100%;
+}
+
+.sidebar-menu {
+  background: transparent !important;
+  border: none !important;
+}
+
+.sidebar-menu .ant-menu-item {
+  margin: 4px 0 !important;
+  border-radius: var(--radius-md) !important;
+  height: 40px !important;
+  line-height: 40px !important;
+}
+
+.sidebar-menu .ant-menu-item:hover {
+  background: rgba(0, 229, 255, 0.08) !important;
+}
+
+.sidebar-menu .ant-menu-item-selected {
+  background: rgba(0, 229, 255, 0.12) !important;
+  color: var(--color-primary) !important;
+}
+
+.sidebar-menu .ant-menu-item-selected::after {
+  display: none !important;
+}
+
+.sidebar-menu .ant-menu-item a {
+  color: inherit !important;
+}
