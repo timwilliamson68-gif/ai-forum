@@ -47,7 +47,7 @@ export function SidebarSkeleton() {
 
 export function RightSidebarSkeleton() {
   return (
-    <Card className="right-sidebar-skeleton glass" bordered={false}>
+    <Card className="right-sidebar-skeleton glass" variant="borderless">
       <Skeleton active paragraph={{ rows: 3 }} />
     </Card>
   );

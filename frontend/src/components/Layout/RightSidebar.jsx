@@ -50,7 +50,7 @@ export default function RightSidebar() {
           </span>
         }
         className="sidebar-card"
-        bordered={false}
+        variant="borderless"
       >
         {loading ? (
           <Skeleton active paragraph={{ rows: 4 }} />

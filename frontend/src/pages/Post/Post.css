@@ -1,169 +1,73 @@
-/* Post 页面样式 - 科技感帖子详情 */
-
-.post-page {
-  padding: var(--spacing-md);
-}
-
-.post-detail {
-  margin-top: var(--spacing-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  transition: border-color 0.3s ease;
-}
-
-.post-detail:hover {
-  border-color: rgba(0, 229, 255, 0.3);
-}
-
-.post-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.author-avatar {
-  border: 2px solid var(--color-primary);
-  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
-  transition: box-shadow 0.3s ease;
-}
-
-.author-avatar:hover {
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
-}
-
-.author-info {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.author-name {
+.markdown-body {
   color: var(--color-text-primary);
+  line-height: 1.6;
   font-size: 16px;
+  word-wrap: break-word;
 }
 
-.post-time {
-  font-size: 13px;
+.markdown-body p {
+  margin-bottom: 1em;
 }
 
-.category-tag {
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-body code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: var(--color-elevated);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+}
+
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: var(--color-base);
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+}
+
+.markdown-body pre code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
   background: transparent;
-  border: 1px solid var(--color-primary);
+  border: 0;
+}
+
+.markdown-body a {
   color: var(--color-primary);
+  text-decoration: none;
 }
 
-.post-title {
-  color: var(--color-text-primary);
-  font-size: 24px;
-  margin-bottom: var(--spacing-md);
+.markdown-body a:hover {
+  text-decoration: underline;
 }
 
-.post-content {
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: transparent;
+}
+
+.markdown-body blockquote {
+  padding: 0 1em;
   color: var(--color-text-secondary);
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.post-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.action-btn {
-  transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
-}
-
-.view-count {
-  margin-left: auto;
-  font-size: 13px;
-}
-
-/* 评论区域 */
-.comment-section {
-  margin-top: var(--spacing-lg);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
-
-.section-title {
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
-}
-
-.comment-input {
-  margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: var(--color-elevated);
-  border-radius: var(--radius-lg);
-}
-
-.comment-textarea {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-sm);
-}
-
-.comment-textarea:focus,
-.comment-textarea:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1);
-}
-
-.submit-btn {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-  box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
-  transform: translateY(-2px);
-}
-
-.submit-btn:disabled {
-  background: var(--color-elevated);
-  box-shadow: none;
-}
-
-.comments-list {
-  margin-top: var(--spacing-md);
-}
-
-/* 玻璃拟态 */
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur) var(--glass-saturate);
-  -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* 响应式 */
-@media (max-width: 640px) {
-  .post-header {
-    flex-wrap: wrap;
-  }
-  
-  .post-title {
-    font-size: 20px;
-  }
-  
-  .post-actions {
-    flex-wrap: wrap;
-  }
-  
-  .view-count {
-    margin-left: 0;
-    width: 100%;
-    margin-top: var(--spacing-sm);
-  }
+  border-left: 0.25em solid var(--color-border);
+  margin: 0 0 16px 0;
 }

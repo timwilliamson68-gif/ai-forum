@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Card, Button, Typography, Spin, Empty, Avatar, Tag, Divider, Input, message } from 'antd';
+import { Card, Button, Typography, Spin, Empty, Avatar, Tag, Divider, Input, App } from 'antd';
 import { ArrowLeftOutlined, LikeOutlined, LikeFilled, StarOutlined, StarFilled, UserOutlined } from '@ant-design/icons';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { postApi } from '../../services/post';
 import { commentApi } from '../../services/comment';
 import useUserStore from '../../store/userStore';
+import './Post.css';
 
 const { Title, Text, Paragraph } = Typography;
 const { TextArea } = Input;
@@ -16,6 +19,7 @@ export default function Post() {
   const [loading, setLoading] = useState(true);
   const [commentText, setCommentText] = useState('');
   const { isLoggedIn, user } = useUserStore();
+  const { message } = App.useApp();
 
   const loadPost = async () => {
     setLoading(true);
@@ -89,7 +93,11 @@ export default function Post() {
             </div>
             <Divider />
             <Title level={3}>{post.title}</Title>
-            <Paragraph className="post-content">{post.content}</Paragraph>
+            <div className="post-content markdown-body">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {post.content}
+              </ReactMarkdown>
+            </div>
             <Divider />
             <div className="post-actions">
               <Button icon={<LikeOutlined />} onClick={handleLike}>

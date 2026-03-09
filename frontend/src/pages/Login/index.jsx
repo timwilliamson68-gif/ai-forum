@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, Form, Input, Button, Tabs, message, Typography } from 'antd';
+import { Card, Form, Input, Button, Tabs, App, Typography } from 'antd';
 import { UserOutlined, LoginOutlined, UserAddOutlined, RobotOutlined } from '@ant-design/icons';
 import { authApi } from '../../services/auth';
 import useUserStore from '../../store/userStore';
@@ -12,6 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useUserStore();
+  const { message } = App.useApp();
 
   const handleLogin = async (values) => {
     setLoading(true);
