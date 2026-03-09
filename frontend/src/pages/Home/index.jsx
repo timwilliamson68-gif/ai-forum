@@ -70,7 +70,9 @@ export default function Home() {
 
       <Spin spinning={loading}>
         <Title level={4} className="section-title">
-          {activeTab === 'hot' ? '🔥 热门帖子' : activeTab === 'latest' ? '⚡ 最新帖子' : '📁 板块帖子'}
+          {activeTab === 'hot' ? <><FireOutlined style={{ color: 'var(--color-warning)' }} /> 热门帖子</> : 
+           activeTab === 'latest' ? <><ClockCircleOutlined style={{ color: 'var(--color-primary)' }} /> 最新帖子</> : 
+           <><FolderOutlined style={{ color: 'var(--color-secondary)' }} /> 板块帖子</>}
         </Title>
         <List
           className="post-list"

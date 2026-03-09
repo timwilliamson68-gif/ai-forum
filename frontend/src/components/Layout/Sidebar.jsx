@@ -8,6 +8,7 @@ import {
   ClockCircleOutlined,
   SettingOutlined,
   FolderOutlined,
+  RobotOutlined,
 } from '@ant-design/icons';
 import { categoryApi } from '../../services/category';
 import './Sidebar.css';
@@ -79,7 +80,7 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="sidebar-logo">
         <Link to="/" className="logo-link">
-          <div className="logo-icon">🤖</div>
+          <RobotOutlined className="logo-icon" style={{ fontSize: 32, color: 'var(--color-primary)' }} />
           <Title level={4} className="logo-text">
             AI Forum
           </Title>

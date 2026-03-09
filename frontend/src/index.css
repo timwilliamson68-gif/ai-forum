@@ -154,6 +154,15 @@ button {
   backdrop-filter: var(--glass-blur) var(--glass-saturate);
   -webkit-backdrop-filter: var(--glass-blur) var(--glass-saturate);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  /* RGB 边框渐变 - 增强科技感 */
+  position: relative;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.1);
+  transition: box-shadow var(--transition-normal);
+}
+
+.glass:hover {
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.2), 0 0 20px rgba(0, 229, 255, 0.1);
 }
 
 .glass-light {
