@@ -3,19 +3,21 @@ import { ConfigProvider, theme, App as AntApp } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import useUserStore from './store/userStore';
 import Router from './router';
+import GlobalApp from './components/GlobalApp';
 import './index.css';
 
 // OKLCH 色彩系统
 const colorTokens = {
   // 背景色
-  colorBgBase: '#0d0d12', // oklch(12% 0.01 260) 极深蓝黑
-  colorBgContainer: '#15151d', // oklch(18% 0.02 260) 卡片层
-  colorBgElevated: '#1c1c26', // oklch(22% 0.02 260) 悬浮层
+  colorBgBase: 'oklch(12% 0.01 260)', // oklch(12% 0.01 260) 极深蓝黑
+  colorBgContainer: 'oklch(18% 0.02 260)', // oklch(18% 0.02 260) 卡片层
+  colorBgElevated: 'oklch(22% 0.02 260)', // oklch(22% 0.02 260) 悬浮层
   colorBgLayout: '#0a0a0f', // 最深背景
   
   // 品牌色
-  colorPrimary: '#00e5ff', // oklch(70% 0.18 200) 电光青
-  colorInfo: '#00e5ff',
+  colorPrimary: 'oklch(70% 0.18 200)', // oklch(70% 0.18 200) 电光青
+  colorSecondary: 'oklch(65% 0.22 290)',
+  colorInfo: 'oklch(70% 0.18 200)',
   colorSuccess: '#00ff88', // 霓虹绿
   colorWarning: '#ff8c00', // 霓虹橙
   colorError: '#ff3366', // 霓虹红
@@ -26,7 +28,7 @@ const colorTokens = {
   colorTextTertiary: 'rgba(255, 255, 255, 0.45)',
   
   // 边框色
-  colorBorder: '#2a2a38',
+  colorBorder: 'oklch(25% 0.03 260 / 0.1)',
   colorBorderSecondary: '#1e1e28',
   
   // 圆角
@@ -87,6 +89,7 @@ function App() {
       }}
     >
       <AntApp>
+        <GlobalApp />
         <Router />
       </AntApp>
     </ConfigProvider>

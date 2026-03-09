@@ -25,10 +25,6 @@ export default function RightSidebar() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
   const loadCategories = async () => {
     try {
       const res = await categoryApi.list({ pageSize: 10 });
@@ -38,6 +34,11 @@ export default function RightSidebar() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    loadCategories();
+
+  }, []);
 
   return (
     <div className="right-sidebar">

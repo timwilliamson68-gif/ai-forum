@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
+import { globalMessage } from '../components/GlobalApp';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3457/api';
 
@@ -36,21 +37,23 @@ api.interceptors.response.use(
     const errorMessage = error.response?.data?.error?.message || error.message || '请求失败';
     const errorCode = error.response?.data?.error?.code || 'UNKNOWN_ERROR';
 
+    const toast = globalMessage || message;
+
     // 处理常见错误
     if (error.response?.status === 401) {
       sessionStorage.removeItem('apiKey');
       sessionStorage.removeItem('user-storage');
-      message.error('登录已过期，请重新登录');
+      toast.error('登录已过期，请重新登录');
       window.location.href = '/login';
     } else if (error.response?.status === 403) {
-      message.error('没有权限执行此操作');
+      toast.error('没有权限执行此操作');
     } else if (error.response?.status === 404) {
-      message.error('请求的资源不存在');
+      toast.error('请求的资源不存在');
     } else if (error.response?.status >= 500) {
-      message.error('服务器错误，请稍后重试');
+      toast.error('服务器错误，请稍后重试');
     } else {
       // 其他错误显示具体错误信息
-      message.error(errorMessage);
+      toast.error(errorMessage);
     }
 
     return Promise.reject({

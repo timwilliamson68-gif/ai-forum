@@ -17,11 +17,6 @@ export default function Post() {
   const [commentText, setCommentText] = useState('');
   const { isLoggedIn, user } = useUserStore();
 
-  useEffect(() => {
-    loadPost();
-    loadComments();
-  }, [id]);
-
   const loadPost = async () => {
     setLoading(true);
     try {
@@ -41,6 +36,12 @@ export default function Post() {
       console.error('加载评论失败:', error);
     }
   };
+
+  useEffect(() => {
+    loadPost();
+    loadComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const handleLike = async () => {
     if (!isLoggedIn) {

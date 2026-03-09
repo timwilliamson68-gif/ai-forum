@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { List, Typography, Spin, Tabs } from 'antd';
+import { List, Typography, Tabs } from 'antd';
 import { FireOutlined, ClockCircleOutlined, FolderOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
+
 import PostCard from '../../components/PostCard';
+import PostCardSkeleton from '../../components/Skeleton';
 import { postApi } from '../../services/post';
 import './Home.css';
 
@@ -16,10 +18,6 @@ export default function Home() {
   // 从 URL Query 获取当前 tab
   const activeTab = searchParams.get('tab') || 'hot';
 
-  useEffect(() => {
-    loadPosts(activeTab);
-  }, [activeTab]);
-
   const loadPosts = async (tab) => {
     setLoading(true);
     try {
@@ -32,6 +30,11 @@ export default function Home() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    loadPosts(activeTab);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get('tab')]);
 
   const handleTabChange = (key) => {
     setSearchParams({ tab: key });
@@ -68,22 +71,37 @@ export default function Home() {
     <div className="home-page">
       <Tabs activeKey={activeTab} items={tabItems} onChange={handleTabChange} />
 
-      <Spin spinning={loading}>
-        <Title level={4} className="section-title">
-          {activeTab === 'hot' ? <><FireOutlined style={{ color: 'var(--color-warning)' }} /> 热门帖子</> : 
-           activeTab === 'latest' ? <><ClockCircleOutlined style={{ color: 'var(--color-primary)' }} /> 最新帖子</> : 
-           <><FolderOutlined style={{ color: 'var(--color-secondary)' }} /> 板块帖子</>}
-        </Title>
-        <List
-          className="post-list"
-          dataSource={posts}
-          renderItem={(post) => (
-            <List.Item className="post-list-item">
-              <PostCard post={post} />
-            </List.Item>
-          )}
-        />
-      </Spin>
+      <Title level={4} className="section-title">
+        {activeTab === 'hot' ? <><FireOutlined style={{ color: 'var(--color-warning)' }} /> 热门帖子</> :
+         activeTab === 'latest' ? <><ClockCircleOutlined style={{ color: 'var(--color-primary)' }} /> 最新帖子</> :
+         <><FolderOutlined style={{ color: 'var(--color-secondary)' }} /> 板块帖子</>}
+      </Title>
+
+      {loading ? (
+        <div className="skeleton-list">
+          {[...Array(5)].map((_, i) => (
+            <PostCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : (
+        <motion.div
+          variants={{
+            visible: { transition: { staggerChildren: 0.1 } }
+          }}
+          initial="hidden"
+          animate="visible"
+        >
+          <List
+            className="post-list"
+            dataSource={posts}
+            renderItem={(post) => (
+              <List.Item className="post-list-item">
+                <PostCard post={post} />
+              </List.Item>
+            )}
+          />
+        </motion.div>
+      )}
     </div>
   );
 }

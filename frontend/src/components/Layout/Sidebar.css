@@ -18,6 +18,19 @@
   text-decoration: none;
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .logo-text, .section-title span, .category-list, .ant-menu-title-content {
+    display: none !important;
+  }
+  .sidebar-logo {
+    padding: var(--spacing-xs);
+    justify-content: center;
+  }
+  .sidebar-section {
+    display: none;
+  }
+}
+
 .logo-icon {
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.5));
 }

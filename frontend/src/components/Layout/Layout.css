@@ -10,9 +10,10 @@
 
 .layout-container {
   display: grid;
-  grid-template-columns: 260px 1fr 320px;
+  grid-template-columns: 260px minmax(auto, 800px) 320px;
   gap: var(--spacing-lg);
-  max-width: 1600px;
+  max-width: 1400px;
+  justify-content: center;
   margin: 0 auto;
   padding: var(--spacing-lg);
   width: 100%;
@@ -52,14 +53,14 @@
 /* Desktop (≥1200px) - 三栏布局 */
 @media (min-width: 1200px) {
   .layout-container {
-    grid-template-columns: 260px 1fr 320px;
+    grid-template-columns: 260px minmax(auto, 800px) 320px;
   }
 }
 
 /* Tablet (768-1199px) - 双栏布局 */
 @media (min-width: 768px) and (max-width: 1199px) {
   .layout-container {
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 64px minmax(auto, 800px);
     gap: var(--spacing-md);
   }
   

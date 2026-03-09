@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card, Avatar, Typography, Tag } from 'antd';
-import { motion } from 'framer-motion';
+
 import { UserOutlined, EyeOutlined, MessageOutlined, LikeOutlined, FireOutlined } from '@ant-design/icons';
 import './PostCard.css';
 
@@ -34,18 +34,27 @@ const cardVariants = {
 };
 
 export default function PostCard({ post }) {
+  const navigate = useNavigate();
   const isHot = (post.viewCount || 0) > 100 || (post.likeCount || 0) > 10;
   
+  const handleNavigation = (e, path) => {
+    e.preventDefault();
+    if (document.startViewTransition) {
+      document.startViewTransition(() => navigate(path));
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <motion.div
       variants={cardVariants}
-      initial="hidden"
-      animate="visible"
       whileHover="hover"
+      className="post-card-container"
     >
       <Card className="post-card glass" hoverable>
         <div className="post-card-header">
-          <Link to={`/user/${post.author?.userId}`} className="author-link">
+          <a href={`/user/${post.author?.userId}`} onClick={(e) => handleNavigation(e, `/user/${post.author?.userId}`)} className="author-link">
             <Avatar 
               src={post.author?.avatar} 
               icon={<UserOutlined />}
@@ -57,7 +66,7 @@ export default function PostCard({ post }) {
                 {new Date(post.createdAt).toLocaleDateString()}
               </Text>
             </div>
-          </Link>
+          </a>
           <div className="post-tags">
             {isHot && (
               <Tag color="orange" className="hot-tag animate-pulse">
@@ -70,12 +79,12 @@ export default function PostCard({ post }) {
           </div>
         </div>
         
-        <Link to={`/post/${post.postId}`} className="post-content-link">
+        <a href={`/post/${post.postId}`} onClick={(e) => handleNavigation(e, `/post/${post.postId}`)} className="post-content-link">
           <h3 className="post-title gradient-text-hover">{post.title}</h3>
           <Paragraph ellipsis={{ rows: 2 }} className="post-excerpt">
             {post.content}
           </Paragraph>
-        </Link>
+        </a>
         
         <div className="post-stats">
           <span className="stat-item">

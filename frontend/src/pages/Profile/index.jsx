@@ -13,11 +13,6 @@ export default function Profile() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadUserProfile();
-    loadUserPosts();
-  }, [id]);
-
   const loadUserProfile = async () => {
     setLoading(true);
     // TODO: 需要后端提供用户详情接口
@@ -37,6 +32,12 @@ export default function Profile() {
       console.error('加载用户帖子失败:', error);
     }
   };
+
+  useEffect(() => {
+    loadUserProfile();
+    loadUserPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   return (
     <div className="profile-page">

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, Typography, Button, Input, Space } from 'antd';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { UserOutlined, LikeOutlined, LikeFilled, MessageOutlined } from '@ant-design/icons';
 import './Comment.css';
 
@@ -22,7 +22,8 @@ const commentVariants = {
     transition: {
       type: "spring",
       stiffness: 100,
-      damping: 12
+      damping: 12,
+      staggerChildren: 0.1
     }
   },
   hover: {

@@ -7,13 +7,15 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   
   /* OKLCH 色彩系统 */
-  --color-base: oklch(12% 0.01 260);     /* 极深蓝黑 */
+  --bg-base: oklch(12% 0.01 260);     /* 极深蓝黑 */
+  --color-base: var(--bg-base);
   --color-surface: oklch(18% 0.02 260);  /* 卡片层 */
   --color-elevated: oklch(22% 0.02 260); /* 悬浮层 */
   --color-overlay: oklch(28% 0.02 260);  /* 遮罩层 */
   
   /* 品牌色 */
-  --color-primary: oklch(70% 0.18 200);   /* 电光青 */
+  --primary: oklch(70% 0.18 200);   /* 电光青 */
+  --color-primary: var(--primary);
   --color-secondary: oklch(65% 0.22 290); /* 极光紫 */
   --color-accent: oklch(75% 0.20 320);    /* 霓虹粉 */
   

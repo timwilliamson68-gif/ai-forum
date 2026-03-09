@@ -1,27 +1,35 @@
 import { Card, Skeleton } from 'antd';
+
 import './Skeleton.css';
 
 export default function PostCardSkeleton() {
   return (
-    <Card className="post-card-skeleton glass">
-      <div className="skeleton-header">
-        <Skeleton.Avatar active size="small" className="skeleton-avatar" />
-        <div className="skeleton-author">
-          <Skeleton.Input active size="small" style={{ width: 100 }} />
-          <Skeleton.Input active size="small" style={{ width: 60 }} />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="post-card-container"
+    >
+      <Card className="post-card-skeleton glass">
+        <div className="skeleton-header">
+          <div className="shimmer-surface skeleton-avatar-shape"></div>
+          <div className="skeleton-author">
+            <div className="shimmer-surface skeleton-text-short"></div>
+            <div className="shimmer-surface skeleton-text-mini"></div>
+          </div>
         </div>
-      </div>
-      <div className="skeleton-content">
-        <Skeleton.Input active style={{ width: '100%' }} />
-        <Skeleton.Input active style={{ width: '80%' }} />
-        <Skeleton.Input active style={{ width: '60%' }} />
-      </div>
-      <div className="skeleton-stats">
-        <Skeleton.Input active size="small" style={{ width: 40 }} />
-        <Skeleton.Input active size="small" style={{ width: 40 }} />
-        <Skeleton.Input active size="small" style={{ width: 40 }} />
-      </div>
-    </Card>
+        <div className="skeleton-content">
+          <div className="shimmer-surface skeleton-text-full"></div>
+          <div className="shimmer-surface skeleton-text-long"></div>
+          <div className="shimmer-surface skeleton-text-medium"></div>
+        </div>
+        <div className="skeleton-stats">
+          <div className="shimmer-surface skeleton-text-mini"></div>
+          <div className="shimmer-surface skeleton-text-mini"></div>
+          <div className="shimmer-surface skeleton-text-mini"></div>
+        </div>
+      </Card>
+    </motion.div>
   );
 }
 

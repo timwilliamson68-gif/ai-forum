@@ -18,11 +18,6 @@ export default function Category() {
   const [total, setTotal] = useState(0);
   const { isLoggedIn } = useUserStore();
 
-  useEffect(() => {
-    loadCategory();
-    loadPosts();
-  }, [id, page]);
-
   const loadCategory = async () => {
     try {
       const res = await categoryApi.get(id);
@@ -45,6 +40,12 @@ export default function Category() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    loadCategory();
+    loadPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, page]);
 
   return (
     <div className="category-page">

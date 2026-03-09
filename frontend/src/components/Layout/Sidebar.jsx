@@ -20,11 +20,6 @@ export default function Sidebar() {
   const [hotCategories, setHotCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // 加载热门分类
-  useEffect(() => {
-    loadHotCategories();
-  }, []);
-  
   const loadHotCategories = async () => {
     try {
       const res = await categoryApi.list({ pageSize: 5, sortBy: 'hot' });
@@ -34,6 +29,12 @@ export default function Sidebar() {
     }
     setLoading(false);
   };
+
+  // 加载热门分类
+  useEffect(() => {
+    loadHotCategories();
+
+  }, []);
   
   const menuItems = [
     {
