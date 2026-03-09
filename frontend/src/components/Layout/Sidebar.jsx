@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, Typography, List, Skeleton } from 'antd';
+import { Menu, Typography, Skeleton } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import {
   HomeOutlined,
@@ -105,17 +105,15 @@ export default function Sidebar() {
         {loading ? (
           <Skeleton active paragraph={{ rows: 3 }} />
         ) : (
-          <List
-            className="category-list"
-            dataSource={hotCategories}
-            renderItem={(cat) => (
-              <List.Item className="category-item">
+          <div className="ant-list ant-list-split category-list">
+            {hotCategories.map((cat) => (
+              <div className="ant-list-item category-item" key={cat.categoryId}>
                 <Link to={`/category/${cat.categoryId}`}>
                   <Text ellipsis>{cat.name}</Text>
                 </Link>
-              </List.Item>
-            )}
-          />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

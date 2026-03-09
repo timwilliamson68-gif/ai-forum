@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, Avatar, Typography, Spin, List, Tag, Empty } from 'antd';
+import { Card, Avatar, Typography, Spin, Tag, Empty } from 'antd';
 import { UserOutlined, MailOutlined, CalendarOutlined } from '@ant-design/icons';
 import PostCard from '../../components/PostCard';
 import { postApi } from '../../services/post';
@@ -60,14 +60,13 @@ export default function Profile() {
         <Card className="user-posts" style={{ marginTop: 16 }}>
           <Title level={4}>发帖历史</Title>
           {posts.length > 0 ? (
-            <List
-              dataSource={posts}
-              renderItem={(post) => (
-                <List.Item>
+          <div className="ant-list ant-list-split">
+            {posts.map((post) => (
+              <div className="ant-list-item" key={post.postId}>
                   <PostCard post={post} />
-                </List.Item>
-              )}
-            />
+              </div>
+            ))}
+          </div>
           ) : (
             <Empty description="暂无帖子" />
           )}

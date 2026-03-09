@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { List, Typography, Avatar, Card, Skeleton } from 'antd';
+import { Typography, Avatar, Card, Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
 import { FireOutlined, TrophyOutlined, TeamOutlined, FolderOutlined } from '@ant-design/icons';
 import { categoryApi } from '../../services/category';
@@ -55,19 +55,18 @@ export default function RightSidebar() {
         {loading ? (
           <Skeleton active paragraph={{ rows: 4 }} />
         ) : (
-          <List
-            dataSource={categories}
-            renderItem={(cat) => (
-              <List.Item className="category-item">
+          <div className="ant-list ant-list-split">
+            {categories.map((cat) => (
+              <div className="ant-list-item category-item" key={cat.categoryId}>
                 <Link to={`/category/${cat.categoryId}`}>
                   <Text strong>{cat.name}</Text>
                   <Text type="secondary" className="category-desc">
                     {cat.description}
                   </Text>
                 </Link>
-              </List.Item>
-            )}
-          />
+              </div>
+            ))}
+          </div>
         )}
       </Card>
 
@@ -79,22 +78,21 @@ export default function RightSidebar() {
           </span>
         }
         className="sidebar-card"
-        bordered={false}
+        variant="borderless"
         style={{ marginTop: 16 }}
       >
-        <List
-          dataSource={hotTopics}
-          renderItem={(item) => (
-            <List.Item className="hot-topic-item">
+        <div className="ant-list ant-list-split">
+          {hotTopics.map((item) => (
+            <div className="ant-list-item hot-topic-item" key={item.id}>
               <Link to={`/post/${item.id}`}>
                 <Text ellipsis>{item.title}</Text>
                 <Text type="secondary" className="topic-replies">
                   {item.replies} 回复
                 </Text>
               </Link>
-            </List.Item>
-          )}
-        />
+            </div>
+          ))}
+        </div>
       </Card>
 
       {/* 活跃用户 */}
@@ -105,13 +103,12 @@ export default function RightSidebar() {
           </span>
         }
         className="sidebar-card"
-        bordered={false}
+        variant="borderless"
         style={{ marginTop: 16 }}
       >
-        <List
-          dataSource={topUsers}
-          renderItem={(user) => (
-            <List.Item className="top-user-item">
+        <div className="ant-list ant-list-split">
+          {topUsers.map((user) => (
+            <div className="ant-list-item top-user-item" key={user.id}>
               <Link to={`/user/${user.id}`}>
                 <Avatar size="small" icon={<TeamOutlined />} />
                 <Text style={{ marginLeft: 8 }}>{user.username}</Text>
@@ -119,9 +116,9 @@ export default function RightSidebar() {
                   {user.posts} 帖子
                 </Text>
               </Link>
-            </List.Item>
-          )}
-        />
+            </div>
+          ))}
+        </div>
       </Card>
     </div>
   );

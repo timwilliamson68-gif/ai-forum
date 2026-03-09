@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { List, Typography, Tabs } from 'antd';
+import { Typography, Tabs } from 'antd';
 import { FireOutlined, ClockCircleOutlined, FolderOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -91,16 +91,13 @@ export default function Home() {
           }}
           initial="hidden"
           animate="visible"
+          className="post-list ant-list ant-list-split"
         >
-          <List
-            className="post-list"
-            dataSource={posts}
-            renderItem={(post) => (
-              <List.Item className="post-list-item">
-                <PostCard post={post} />
-              </List.Item>
-            )}
-          />
+          {posts.map((post) => (
+            <div className="ant-list-item post-list-item" key={post.postId}>
+              <PostCard post={post} />
+            </div>
+          ))}
         </motion.div>
       )}
     </div>

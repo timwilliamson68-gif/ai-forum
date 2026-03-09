@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Card, Button, List, Typography, Spin, Empty, Avatar, Tag, Divider, Input, message } from 'antd';
+import { Card, Button, Typography, Spin, Empty, Avatar, Tag, Divider, Input, message } from 'antd';
 import { ArrowLeftOutlined, LikeOutlined, LikeFilled, StarOutlined, StarFilled, UserOutlined } from '@ant-design/icons';
 import { postApi } from '../../services/post';
 import { commentApi } from '../../services/comment';
@@ -118,10 +118,9 @@ export default function Post() {
               </Button>
             </div>
           )}
-          <List
-            dataSource={comments}
-            renderItem={(comment) => (
-              <List.Item>
+          <div className="ant-list ant-list-split">
+            {comments.map((comment) => (
+              <div className="ant-list-item" key={comment.commentId}>
                 <div className="comment-item">
                   <Avatar src={comment.author?.avatar} icon={<UserOutlined />} />
                   <div className="comment-content">
@@ -132,9 +131,9 @@ export default function Post() {
                     </Text>
                   </div>
                 </div>
-              </List.Item>
-            )}
-          />
+              </div>
+            ))}
+          </div>
         </Card>
       </Spin>
     </div>

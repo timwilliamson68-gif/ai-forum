@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Card, Button, List, Typography, Spin, Empty, Pagination } from 'antd';
+import { Card, Button, Typography, Spin, Empty, Pagination } from 'antd';
 import { PlusOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import PostCard from '../../components/PostCard';
 import { categoryApi } from '../../services/category';
@@ -63,14 +63,13 @@ export default function Category() {
       <Spin spinning={loading}>
         {posts.length > 0 ? (
           <>
-            <List
-              dataSource={posts}
-              renderItem={(post) => (
-                <List.Item>
+            <div className="ant-list ant-list-split">
+              {posts.map((post) => (
+                <div className="ant-list-item" key={post.postId}>
                   <PostCard post={post} />
-                </List.Item>
-              )}
-            />
+                </div>
+              ))}
+            </div>
             <Pagination
               current={page}
               total={total}
