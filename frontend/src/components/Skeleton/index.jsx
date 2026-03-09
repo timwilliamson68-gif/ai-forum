@@ -1,4 +1,5 @@
 import { Card, Skeleton } from 'antd';
+import { motion } from 'framer-motion';
 
 import './Skeleton.css';
 

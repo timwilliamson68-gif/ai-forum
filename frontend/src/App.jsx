@@ -54,12 +54,12 @@ function App() {
           },
           Menu: {
             colorBgContainer: 'transparent',
-            colorItemBg: 'transparent',
-            colorItemBgHover: 'rgba(0, 229, 255, 0.08)',
-            colorItemBgSelected: 'rgba(0, 229, 255, 0.12)',
-            colorItemText: 'rgba(255, 255, 255, 0.85)',
-            colorItemTextHover: '#00e5ff',
-            colorItemTextSelected: '#00e5ff',
+            itemBg: 'transparent',
+            itemHoverBg: 'rgba(0, 229, 255, 0.08)',
+            itemSelectedBg: 'rgba(0, 229, 255, 0.12)',
+            itemColor: 'rgba(255, 255, 255, 0.85)',
+            itemHoverColor: '#00e5ff',
+            itemSelectedColor: '#00e5ff',
           },
           Button: {
             colorPrimary: colorTokens.colorPrimary,
@@ -78,9 +78,9 @@ function App() {
             inkBarColor: colorTokens.colorPrimary,
           },
           Layout: {
-            colorBgBody: colorTokens.colorBgLayout,
-            colorBgHeader: colorTokens.colorBgContainer,
-            colorBgTrigger: colorTokens.colorBgElevated,
+            bodyBg: colorTokens.colorBgLayout,
+            headerBg: colorTokens.colorBgContainer,
+            triggerBg: colorTokens.colorBgElevated,
           },
           Avatar: {
             colorBgContainer: colorTokens.colorBgElevated,

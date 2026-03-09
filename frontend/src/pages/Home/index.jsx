@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { List, Typography, Tabs } from 'antd';
 import { FireOutlined, ClockCircleOutlined, FolderOutlined } from '@ant-design/icons';
 import { useSearchParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import PostCard from '../../components/PostCard';
 import PostCardSkeleton from '../../components/Skeleton';
