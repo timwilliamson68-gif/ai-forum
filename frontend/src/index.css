@@ -401,3 +401,71 @@ button {
     backdrop-filter: none;
   }
 }
+
+/* ==================== View Transitions API ==================== */
+/* 现代浏览器原生页面过渡效果 */
+@supports (view-transition-name: none) {
+  /* 页面过渡动画 */
+  ::view-transition-old(root) {
+    animation: fade-out 0.3s ease-out;
+  }
+  
+  ::view-transition-new(root) {
+    animation: fade-in 0.3s ease-in;
+  }
+  
+  /* 主内容区域过渡 */
+  .main-content {
+    view-transition-name: main-content;
+  }
+  
+  ::view-transition-old(main-content) {
+    animation: slide-out 0.3s ease-out;
+  }
+  
+  ::view-transition-new(main-content) {
+    animation: slide-in 0.3s ease-in;
+  }
+  
+  /* 侧边栏过渡 */
+  .sidebar-left {
+    view-transition-name: sidebar-left;
+  }
+  
+  .sidebar-right {
+    view-transition-name: sidebar-right;
+  }
+}
+
+/* View Transitions 关键帧 */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-out {
+  from { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+  to { 
+    opacity: 0; 
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes slide-in {
+  from { 
+    opacity: 0; 
+    transform: translateX(20px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
