@@ -1,0 +1,25 @@
+.category-page {
+  padding: 0;
+}
+
+.category-header {
+  margin-bottom: 24px;
+}
+
+.category-info {
+  text-align: center;
+}
+
+.posts-card {
+  margin-top: 16px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+
+.post-list {
+  margin-top: 16px;
+}

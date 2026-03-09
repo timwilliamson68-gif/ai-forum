@@ -1,0 +1,168 @@
+/* Comment 样式 - 科技感评论组件 + Framer Motion 动效 */
+
+.comment-wrapper {
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.comment-item {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.3s ease;
+}
+
+.comment-wrapper:hover .comment-item {
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.comment-avatar {
+  flex-shrink: 0;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.comment-wrapper:hover .comment-avatar {
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+.comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.author-link {
+  text-decoration: none;
+}
+
+.author-name {
+  color: var(--color-text-primary);
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.author-link:hover .author-name {
+  color: var(--color-primary);
+}
+
+.comment-time {
+  color: var(--color-text-tertiary);
+  font-size: 12px;
+}
+
+.comment-text {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.comment-actions {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-text-tertiary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.action-item:hover {
+  color: var(--color-text-primary);
+}
+
+.action-item.liked {
+  color: var(--color-accent);
+}
+
+.action-icon {
+  font-size: 14px;
+}
+
+.action-icon.liked {
+  color: var(--color-accent);
+  filter: drop-shadow(0 0 4px var(--color-accent));
+}
+
+/* 回复输入框 */
+.reply-input {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.reply-textarea {
+  background: var(--color-elevated);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.reply-textarea:focus,
+.reply-textarea:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.1);
+}
+
+.reply-textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* 子评论样式 */
+.replies-list {
+  margin-top: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  border-left: 2px solid var(--color-border);
+}
+
+.replies-list .comment-item {
+  padding: var(--spacing-sm);
+  background: var(--color-elevated);
+}
+
+.replies-list .comment-wrapper {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+  .comment-item {
+    padding: var(--spacing-sm);
+  }
+  
+  .comment-actions {
+    gap: var(--spacing-md);
+  }
+  
+  .replies-list {
+    padding-left: var(--spacing-md);
+  }
+}
+
+/* Container Queries */
+@container (max-width: 400px) {
+  .comment-item {
+    flex-direction: column;
+  }
+  
+  .comment-avatar {
+    align-self: flex-start;
+  }
+}
