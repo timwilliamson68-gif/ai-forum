@@ -5,38 +5,60 @@
 
 const apiKeyModel = require('../models/apiKey.model');
 
+const userModel = require('../models/user.model');
+
 /**
- * API Key 认证中间件
- * 验证 X-API-Key Header 中的 API Key
+ * API Key 认证中间件 (Dual-Mode Auth)
+ * 模式 A (AI): 检查 X-API-Key Header
+ * 模式 B (Human): 检查 Authorization Header 或 Session (我们直接从 Authorization Header 里取个 userId 模拟登录)
  */
 async function authMiddleware(req, res, next) {
   try {
     const apiKey = req.headers['x-api-key'];
-    
-    if (!apiKey) {
-      return res.status(401).json({
-        success: false,
-        error: {
-          code: 'MISSING_API_KEY',
-          message: '缺少 API Key，请在 Header 中提供 X-API-Key'
-        }
-      });
+    const authHeader = req.headers['authorization'];
+    let user = null;
+    let authMode = null;
+
+    // 模式 A (AI): 检查 x-api-key
+    if (apiKey) {
+      user = await apiKeyModel.validateAndGetUser(apiKey);
+      if (user) authMode = 'apikey';
     }
     
-    const user = await apiKeyModel.validateAndGetUser(apiKey);
+    // 模式 B (Human): 若无 API Key 或 API Key 无效，检查 Authorization Header (模拟 JWT/Session)
+    if (!user && authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.substring(7);
+      // 为简化由于后端没有引入 jwt 库，我们暂时将 userId 作为 token (前端登录时也是直接用 userId 模拟 token)
+      // 如果使用了真正的 jwt，应在此处解码并获取 userId
+      try {
+         const decodedUser = await userModel.findById(token);
+         if (decodedUser) {
+           user = {
+              userId: decodedUser.user_id,
+              username: decodedUser.username,
+              role: decodedUser.role,
+              is_bot: decodedUser.is_bot
+           };
+           authMode = 'jwt';
+         }
+      } catch (e) {
+         console.warn("Invalid Authorization token", e);
+      }
+    }
     
     if (!user) {
       return res.status(401).json({
         success: false,
         error: {
-          code: 'INVALID_API_KEY',
-          message: 'API Key 无效或已过期'
+          code: 'UNAUTHORIZED',
+          message: '未登录，请提供 X-API-Key 或 Authorization Header'
         }
       });
     }
     
     // 将用户信息附加到请求对象
     req.user = user;
+    req.authMode = authMode;
     next();
   } catch (error) {
     console.error('Auth middleware error:', error);
@@ -57,14 +79,38 @@ async function authMiddleware(req, res, next) {
 async function optionalAuth(req, res, next) {
   try {
     const apiKey = req.headers['x-api-key'];
+    const authHeader = req.headers['authorization'];
+    let user = null;
+    let authMode = null;
     
     if (apiKey) {
-      const user = await apiKeyModel.validateAndGetUser(apiKey);
-      if (user) {
-        req.user = user;
+      user = await apiKeyModel.validateAndGetUser(apiKey);
+      if (user) authMode = 'apikey';
+    }
+
+    if (!user && authHeader && authHeader.startsWith('Bearer ')) {
+      const token = authHeader.substring(7);
+      try {
+         const decodedUser = await userModel.findById(token);
+         if (decodedUser) {
+           user = {
+              userId: decodedUser.user_id,
+              username: decodedUser.username,
+              role: decodedUser.role,
+              is_bot: decodedUser.is_bot
+           };
+           authMode = 'jwt';
+         }
+      } catch (e) {
+         // ignore
       }
     }
     
+    if (user) {
+      req.user = user;
+      req.authMode = authMode;
+    }
+
     next();
   } catch (error) {
     console.error('Optional auth middleware error:', error);

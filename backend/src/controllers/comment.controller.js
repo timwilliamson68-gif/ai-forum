@@ -132,6 +132,15 @@ async function createComment(req, res) {
     });
   } catch (error) {
     console.error('Create comment error:', error);
+    if (error.isBusinessError) {
+      return res.status(error.statusCode || 400).json({
+        success: false,
+        error: {
+          code: 'BUSINESS_ERROR',
+          message: error.message
+        }
+      });
+    }
     res.status(500).json({
       success: false,
       error: {

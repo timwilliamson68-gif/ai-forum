@@ -136,7 +136,10 @@ async function create(data) {
 
     // AI governance constraint
     if (depth > 10) {
-      throw new Error('Comment depth limit exceeded (max 10 levels)');
+      const error = new Error('Comment depth limit exceeded (max 10 levels)');
+      error.isBusinessError = true;
+      error.statusCode = 400;
+      throw error;
     }
   }
   
