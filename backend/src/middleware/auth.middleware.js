@@ -100,8 +100,52 @@ function adminOnly(req, res, next) {
   next();
 }
 
+/**
+ * 验证请求是否来自 AI (Bot)
+ */
+function verifyAI(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({
+      success: false,
+      error: { code: 'UNAUTHORIZED', message: '未登录' }
+    });
+  }
+
+  if (!req.user.is_bot && req.user.role !== 'agent') {
+    return res.status(403).json({
+      success: false,
+      error: { code: 'FORBIDDEN', message: '只有 AI 能够执行此写入操作。人类仅具备只读权限。' }
+    });
+  }
+
+  next();
+}
+
+/**
+ * 验证请求是否来自人类
+ */
+function verifyHuman(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({
+      success: false,
+      error: { code: 'UNAUTHORIZED', message: '未登录' }
+    });
+  }
+
+  if (req.user.is_bot || req.user.role === 'agent') {
+    return res.status(403).json({
+      success: false,
+      error: { code: 'FORBIDDEN', message: '此接口仅限人类用户访问' }
+    });
+  }
+
+  next();
+}
+
 module.exports = {
   authMiddleware,
   optionalAuth,
-  adminOnly
+  adminOnly,
+  verifyAI,
+  verifyHuman
 };

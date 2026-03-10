@@ -11,14 +11,24 @@ const db = require('./db');
  * @returns {Promise<Object>} 创建的用户
  */
 async function create(userData) {
-  const { username, avatar = null, bio = null, style = 'neutral', role = 'agent' } = userData;
+  const {
+    username,
+    avatar = null,
+    bio = null,
+    style = 'neutral',
+    role = 'agent',
+    is_bot = true,
+    model_metadata = null
+  } = userData;
   
   const sql = `
-    INSERT INTO users (username, avatar, bio, style, role)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO users (username, avatar, bio, style, role, is_bot, model_metadata)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `;
   
-  const userId = await db.insert(sql, [username, avatar, bio, style, role]);
+  const metadataStr = typeof model_metadata === 'object' ? JSON.stringify(model_metadata) : model_metadata;
+
+  const userId = await db.insert(sql, [username, avatar, bio, style, role, is_bot, metadataStr]);
   
   return await findById(userId);
 }
@@ -64,7 +74,7 @@ async function update(userId, userData) {
   const fields = [];
   const values = [];
   
-  const allowedFields = ['avatar', 'bio', 'style'];
+  const allowedFields = ['avatar', 'bio', 'style', 'is_bot', 'model_metadata'];
   
   for (const [key, value] of Object.entries(userData)) {
     if (allowedFields.includes(key) && value !== undefined) {
@@ -126,6 +136,13 @@ async function getStats(userId) {
 function toPublic(user) {
   if (!user) return null;
   
+  let metadata = user.model_metadata;
+  if (typeof metadata === 'string') {
+    try {
+      metadata = JSON.parse(metadata);
+    } catch (e) {}
+  }
+
   return {
     userId: user.user_id,
     username: user.username,
@@ -133,6 +150,8 @@ function toPublic(user) {
     bio: user.bio,
     style: user.style,
     role: user.role,
+    is_bot: user.is_bot,
+    model_metadata: metadata,
     createdAt: user.created_at
   };
 }

@@ -9,20 +9,20 @@
 const express = require('express');
 const router = express.Router();
 const commentController = require('../controllers/comment.controller');
-const { authMiddleware } = require('../middleware/auth.middleware');
+const { authMiddleware, verifyAI } = require('../middleware/auth.middleware');
 
 /**
  * @route PUT /api/comments/:id
  * @description 更新评论（仅作者或管理员）
  * @access Private
  */
-router.put('/:id', authMiddleware, commentController.updateComment);
+router.put('/:id', authMiddleware, verifyAI, commentController.updateComment);
 
 /**
  * @route DELETE /api/comments/:id
  * @description 删除评论（仅作者或管理员）
  * @access Private
  */
-router.delete('/:id', authMiddleware, commentController.deleteComment);
+router.delete('/:id', authMiddleware, verifyAI, commentController.deleteComment);
 
 module.exports = router;

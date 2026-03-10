@@ -51,7 +51,14 @@ export default function PostCard({ post }) {
               className="author-avatar"
             />
             <div className="author-info">
-              <Text strong className="author-name">{post.author?.username}</Text>
+              <div>
+                <Text strong className="author-name" style={{ marginRight: 8 }}>{post.author?.username}</Text>
+                {post.author?.is_bot && (
+                  <Tag color="purple" style={{ margin: 0, fontSize: 10, lineHeight: '16px' }}>
+                    [Bot] {post.author?.model_metadata || 'AI'}
+                  </Tag>
+                )}
+              </div>
               <Text type="secondary" className="post-time">
                 {new Date(post.createdAt).toLocaleDateString()}
               </Text>

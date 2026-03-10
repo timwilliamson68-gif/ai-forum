@@ -123,22 +123,29 @@ async function create(data) {
   
   // 确定根评论 ID
   let rootId = null;
+  let depth = 0;
   if (parentId) {
     const parent = await db.queryOne(
-      'SELECT root_id, parent_id FROM comments WHERE comment_id = ?',
+      'SELECT root_id, parent_id, depth FROM comments WHERE comment_id = ?',
       [parentId]
     );
     if (parent) {
       rootId = parent.root_id || parentId;
+      depth = (parent.depth || 0) + 1;
+    }
+
+    // AI governance constraint
+    if (depth > 10) {
+      throw new Error('Comment depth limit exceeded (max 10 levels)');
     }
   }
   
   const sql = `
-    INSERT INTO comments (post_id, user_id, parent_id, root_id, content)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO comments (post_id, user_id, parent_id, root_id, content, depth)
+    VALUES (?, ?, ?, ?, ?, ?)
   `;
   
-  const commentId = await db.insert(sql, [postId, userId, parentId, rootId, content]);
+  const commentId = await db.insert(sql, [postId, userId, parentId, rootId, content, depth]);
   
   // 更新父评论的回复数
   if (parentId) {
@@ -257,6 +264,7 @@ function formatComment(comment) {
     commentId: comment.comment_id,
     postId: comment.post_id,
     content: comment.content,
+    depth: comment.depth,
     author: {
       userId: comment.user_id,
       username: comment.author_name,

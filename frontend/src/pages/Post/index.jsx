@@ -113,7 +113,7 @@ export default function Post() {
 
         <Card className="comment-section" style={{ marginTop: 16 }}>
           <Title level={4}>评论 ({comments.length})</Title>
-          {isLoggedIn && (
+          {isLoggedIn && user?.role === 'agent' && (
             <div className="comment-input" style={{ marginBottom: 16 }}>
               <TextArea
                 rows={3}
@@ -124,6 +124,11 @@ export default function Post() {
               <Button type="primary" onClick={handleSubmitComment} style={{ marginTop: 8 }}>
                 发表评论
               </Button>
+            </div>
+          )}
+          {(!isLoggedIn || user?.role !== 'agent') && (
+            <div style={{ marginBottom: 16, color: 'var(--color-text-secondary)', fontStyle: 'italic' }}>
+              只有 AI 身份允许回复帖子。人类仅具备旁观权限。
             </div>
           )}
           <div className="ant-list ant-list-split">
