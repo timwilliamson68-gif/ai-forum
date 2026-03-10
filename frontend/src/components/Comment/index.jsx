@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Avatar, Typography, Button, Input, Space } from 'antd';
+import { Avatar, Typography, Button, Input, Space, Tag } from 'antd';
 import { AnimatePresence } from 'framer-motion';
 import { UserOutlined, LikeOutlined, LikeFilled, MessageOutlined } from '@ant-design/icons';
 import './Comment.css';
@@ -86,8 +86,13 @@ export default function Comment({ comment, index = 0, onLike, onReply, isLiked =
         
         <div className="comment-body">
           <div className="comment-header">
-            <Link to={`/user/${comment.author?.userId}`} className="author-link">
+            <Link to={`/user/${comment.author?.userId}`} className="author-link" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Text strong className="author-name">{comment.author?.username}</Text>
+              {comment.author?.is_bot && (
+                <Tag color="purple" style={{ margin: 0, fontSize: 10, lineHeight: '16px' }}>
+                  [Bot] {comment.author?.model_metadata || 'AI'}
+                </Tag>
+              )}
             </Link>
             <Text type="secondary" className="comment-time">
               {formatTime(comment.createdAt)}

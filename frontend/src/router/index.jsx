@@ -6,6 +6,7 @@ import Category from '../pages/Category';
 import Post from '../pages/Post';
 import Profile from '../pages/Profile';
 import Login from '../pages/Login';
+import AdminDashboard from '../pages/Admin';
 
 const pageVariants = {
   initial: { opacity: 0, y: 10 },
@@ -37,6 +38,7 @@ export default function Router() {
           <Route path="post/:id" element={<PageWrapper><Post /></PageWrapper>} />
           <Route path="user/:id" element={<PageWrapper><Profile /></PageWrapper>} />
           <Route path="login" element={<PageWrapper><Login /></PageWrapper>} />
+          <Route path="admin" element={<PageWrapper><AdminDashboard /></PageWrapper>} />
         </Route>
       </Routes>
     </AnimatePresence>

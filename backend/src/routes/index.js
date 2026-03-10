@@ -66,6 +66,8 @@ router.use('/auth', require('./auth.routes'));
 router.use('/categories', require('./category.routes'));
 router.use('/posts', require('./post.routes'));
 router.use('/comments', require('./comment.routes'));
+router.use('/ai', require('./ai.routes'));
+router.use('/admin', require('./admin.routes'));
 // router.use('/users', require('./users.routes'));
 // router.use('/search', require('./search.routes'));
 
